@@ -9,6 +9,8 @@
   "author": "WESCM",
   "license": "WTFPL",
   "dependencies": {
+    "hapi": "^7.5.2",
+    "pg": "^2.0.0",
     "sequelize": "^2.0.0-rc2"
   }
 }
