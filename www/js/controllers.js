@@ -48,6 +48,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ImgListCtrl', function($scope) {
+  // TODO populer imglist avec les infos de la BDD
+  // template = imglist.html
   $scope.imglist = [
     { title: 'Mathieu', id: 1 },
     { title: 'Degaine', id: 2 },
@@ -56,4 +58,27 @@ angular.module('starter.controllers', [])
     { title: 'de', id: 5 },
     { title: 'noob !', id: 6 }
   ];
+})
+
+.controller('ImgDetailCtrl', function($scope, $stateParams) {
+  // TODO Récupérer les élements de l'image avec son id passé en paramètres
+  // template = imgdetail.html
+  $scope.img =
+    { title: 'Mathieu', 
+      id: 1,
+      plus: 28,
+      moins: 12,
+      src: "http://img3.wikia.nocookie.net/__cb20061016203941/desencyclopedie/images/c/c4/Noob.jpg",
+      reviews: [{
+        stars: 5,
+        body: "I love this gem!",
+        author: "joe@example.org",
+        createdOn: 1397490980837
+      }, {
+        stars: 1,
+        body: "This gem sucks.",
+        author: "tim@example.org",
+        createdOn: 1397490980837
+      }]
+    };
 });

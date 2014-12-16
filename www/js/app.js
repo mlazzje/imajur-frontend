@@ -76,7 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
   .state('app.imgdetail', {
-    url: "/imgdetail",
+    url: "/imgdetail/:imgId",
     views: {
       'menuContent': {
         templateUrl: "templates/imgdetail.html",
