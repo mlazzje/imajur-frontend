@@ -45,4 +45,15 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+})
+
+.controller('ImgListCtrl', function($scope) {
+  $scope.imglist = [
+    { title: 'Mathieu', id: 1 },
+    { title: 'Degaine', id: 2 },
+    { title: 'est un', id: 3 },
+    { title: 'putain', id: 4 },
+    { title: 'de', id: 5 },
+    { title: 'noob !', id: 6 }
+  ];
 });

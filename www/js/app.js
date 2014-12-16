@@ -71,6 +71,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: "templates/imglist.html",
+        controller: 'ImgListCtrl'
       }
     }
   })
@@ -79,6 +80,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: "templates/imgdetail.html",
+        controller: 'ImgDetailCtrl'
       }
     }
   });
