@@ -60,6 +60,14 @@ angular.module('starter.controllers', [])
   ];
 })
 
+.controller('ReviewController', function() {
+  this.review = [];
+  this.addReview = function(img) {
+    img.reviews.push(this.review);
+    this.review = [];
+  };
+})
+
 .controller('ImgDetailCtrl', function($scope, $stateParams) {
   // TODO Récupérer les élements de l'image avec son id passé en paramètres
   // template = imgdetail.html
