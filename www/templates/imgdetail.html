@@ -15,8 +15,17 @@
         <ion-list>
             <ion-item ng-repeat="review in img.reviews">{{review.body}}</ion-item>
         </ion-list>
-        <label class="item item-input">
-            <span class="input-label">Comment</span><textarea placeholder=""> </textarea>
-        </label>
+        <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(img)">
+            <!--  Live Preview -->
+            <ion-list>
+                <ion-item>{{reviewCtrl.review.body}}</ion-item>
+            </ion-list>
+            <label class="item item-input">
+                <span class="input-label">Comment</span><textarea ng-model="reviewCtrl.review.body" placeholder=""> </textarea>
+            </label>
+            <label class="item">
+                <button class="button button-block button-positive" type="submit">Send comment</button>
+            </label>
+        </form>
     </ion-content>
 </ion-view>
