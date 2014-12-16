@@ -83,6 +83,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: 'ImgDetailCtrl'
       }
     }
+  })
+    .state('app.upload', {
+    url: "/upload",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/upload.html",
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/imglist');
