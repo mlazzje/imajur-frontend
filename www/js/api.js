@@ -9,29 +9,28 @@ function onPhotoDataSuccess(imageData) {
     cameraImage.style.visibility = 'visible';
     cameraImage.src = "data:image/jpeg;base64," + imageData;
 }
-
+// fonction lancée quand une photo à été prise ou recupérée
 function onPhotoURISuccess(imageURI) {
     console.log("* * * onPhotoURISuccess");
-    // Uncomment to view the image file URI 
-    // console.log(imageURI);
+    // on affiche dans la page d'upload
     var cameraImage = document.getElementById('cameraImage');
     cameraImage.style.visibility = 'visible';
     cameraImage.src = imageURI;
 }
-
+// permet de prendre une photo
 function take_pic() {
+    // en cas de photo prise la fonction onPhotoURISuccess est appelée
     navigator.camera.getPicture(onPhotoURISuccess, function(ex) {
         alert("Camera Error!");
     }, { quality : 30, destinationType: Camera.DestinationType.FILE_URI });
 }
-
+// permet de recherché une photo stockée dans l'appareil
 function album_pic() { 
+    // en cas de photo prise la fonction onPhotoURISuccess est appelée
     navigator.camera.getPicture(onPhotoURISuccess, function(ex) {
             alert("Camera Error!"); }, 
             { quality: 30, 
         destinationType: Camera.DestinationType.FILE_URI,
-        // Android Quirk: Camera.PictureSourceType.PHOTOLIBRARY and 
-        // Camera.PictureSourceType.SAVEDPHOTOALBUM display the same photo album.
         sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM });
 }
 
