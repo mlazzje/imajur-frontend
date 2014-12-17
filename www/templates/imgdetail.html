@@ -9,8 +9,12 @@
         <a ng-click="login()" class="button button-positive button-block">Log in</a>
         <span style="color:green;">{{img.plus}}</span><span style="color:red; margin-left:20px;">{{img.moins}}</span>
         <div class="button-bar">
-            <button class="button button-balanced button-block">+1</button>
-            <button class="button button-assertive button-block">-1</button>
+            <button class="button button-balanced button-block">
+                <img src="img/Chuck-Norris.png" style='max-width: 5%'>
+            </button>
+            <button class="button button-assertive button-block">
+                <img src="img/Grumpy.png" style='max-width: 5%'>
+            </button>
         </div>
         <ion-list>
             <ion-item ng-repeat="review in img.reviews">{{review.body}}</ion-item>
