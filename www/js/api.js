@@ -35,6 +35,8 @@ function album_pic() {
         sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM });
 }
 
+// template browse
+// permet de changer le nbre d'images par ligne
 function change_view(nb) {
     $(".col").removeClass("col-33");
     $(".col").removeClass("col-50");
