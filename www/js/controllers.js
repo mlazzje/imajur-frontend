@@ -67,9 +67,13 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('ImgDetailCtrl', function($scope, $stateParams) {
+.controller('ImgDetailCtrl', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
   // TODO Récupérer les élements de l'image avec son id passé en paramètres
   // template = imgdetail.html
+  $scope.test = [];
+  $http.get('http://twix.linuxw.info/image/get/1').success(function(data) {
+    $scope.test = data;
+  });
   $scope.img =
     { title: 'Mathieu', 
       id: 1,
@@ -88,4 +92,4 @@ angular.module('starter.controllers', [])
         createdOn: 1397490980837
       }]
     };
-});
+} ]);
