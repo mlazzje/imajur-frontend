@@ -1,22 +1,22 @@
 <ion-view title="Page">
-	<ion-nav-buttons side="left">
-        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    </ion-nav-buttons>
-    <ion-content padding="true" class="has-header">
-    <div class="ui-grid-a"> 
-     	<div class="button-bar">
-            <button onclick='take_pic();' class="button button-balanced button-block">Take picture</button>
-            <button onclick='album_pic();' class="button button-balanced button-block">Select picture</button>
-        </div>
-     	<div class="result-block"></div>			
-      	<img id="cameraImage" src="" height="50" width="50"/>
-      	<form>
-            <label class="item item-input">
-                <span class="input-label">Title</span>
-                <input type="text" placeholder="lol">
-            </label>
-        </form>
-        <button class="button button-positive button-block">Send</button>
-	</div>
-    </ion-content>
+<ion-nav-buttons side="left">
+<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+</ion-nav-buttons>
+<ion-content padding="true" class="has-header">
+<div class="ui-grid-a"> 
+  <div class="button-bar">
+    <button onclick='take_pic();' class="button button-balanced button-block">Take picture</button>
+    <button onclick='album_pic();' class="button button-balanced button-block">Select picture</button>
+  </div>
+  <form>
+    <label class="item item-input">
+      <span class="input-label">Title</span>
+      <input type="text" placeholder="lol">
+    </label>
+  </form>
+  <button class="button button-positive button-block">Send</button>
+  <div class="result-block" style="max-width: 300px"></div>      
+  <img id="cameraImage" src="" style="max-width: 100%"/>
+</div>
+</ion-content>
 </ion-view>
