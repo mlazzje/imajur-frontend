@@ -51,12 +51,12 @@ angular.module('starter.controllers', [])
   // TODO populer imglist avec les infos de la BDD
   // template = imglist.html
   $scope.imglist = [
-    { title: 'Mathieu', id: 1 },
-    { title: 'Degaine', id: 2 },
-    { title: 'est un', id: 3 },
-    { title: 'putain', id: 4 },
-    { title: 'de', id: 5 },
-    { title: 'noob !', id: 6 }
+    { id: 1, title: 'Mathieu', nb_comments:8, plus: 28, moins: 1, src:"http://fc07.deviantart.net/fs71/f/2011/054/3/c/3c512cf3b2dc387a34835c12ad9b4780-d3a8phz.gif" },
+    { id: 2,title: 'Degaine', nb_comments:12, plus: 2, moins: 42,src: "http://www.jeu-poker-coach.com/images/profils-joueurs/pokerdonk-prof.jpg" },
+    { id: 3,title: 'est un', nb_comments:14,plus: 3, moins: 64,src: "http://i218.photobucket.com/albums/cc241/sasuke123409501/Noob.gif" },
+    { id: 4,title: 'putain', nb_comments:6,plus: 14, moins: 31,src: "http://fantasy-media.s3.amazonaws.com/players/955d8c3b7c14d982bfbf5f2f4a45b734.png" },
+    { id: 5,title: 'de', nb_comments:1,plus: 6, moins: 21,src: "http://img4.wikia.nocookie.net/__cb20140627170803/plantsvszombies/images/9/98/A-noob-is_new.png" },
+    { id: 6,title: 'noob !', nb_comments:8, plus: 89, moins: 1,src: "http://mmcdn4.hosting-media.net/jpg128/u3610151766693.jpg" }
   ];
 })
 
@@ -66,6 +66,19 @@ angular.module('starter.controllers', [])
     img.reviews.push(this.review);
     this.review = [];
   };
+})
+
+.controller('BrowseCtrl', function($scope) {
+  // TODO populer imglist avec les infos de la BDD
+  // template = imglist.html
+  $scope.images = [
+    { id: 1, title: 'Mathieu', src:"http://fc07.deviantart.net/fs71/f/2011/054/3/c/3c512cf3b2dc387a34835c12ad9b4780-d3a8phz.gif" },
+    { id: 2,title: 'Degaine', src: "http://www.jeu-poker-coach.com/images/profils-joueurs/pokerdonk-prof.jpg" },
+    { id: 3,title: 'est un', src: "http://i218.photobucket.com/albums/cc241/sasuke123409501/Noob.gif" },
+    { id: 4,title: 'putain', src: "http://fantasy-media.s3.amazonaws.com/players/955d8c3b7c14d982bfbf5f2f4a45b734.png" },
+    { id: 5,title: 'de', src: "http://img4.wikia.nocookie.net/__cb20140627170803/plantsvszombies/images/9/98/A-noob-is_new.png" },
+    { id: 6,title: 'noob !', src: "http://mmcdn4.hosting-media.net/jpg128/u3610151766693.jpg" }
+  ];
 })
 
 .controller('ImgDetailCtrl', function($scope, $stateParams) {

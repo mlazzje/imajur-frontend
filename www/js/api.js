@@ -34,3 +34,16 @@ function album_pic() {
         // Camera.PictureSourceType.SAVEDPHOTOALBUM display the same photo album.
         sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM });
 }
+
+function change_view(nb) {
+    $(".col").removeClass("col-33");
+    $(".col").removeClass("col-50");
+    switch(nb) {
+        case 2:
+            $(".col").addClass("col-50");
+            break;
+        case 3:
+            $(".col").addClass("col-33");
+            break;
+    }
+}
