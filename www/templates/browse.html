@@ -1,26 +1,29 @@
 <ion-view title="Browse all images">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content padding="true" class="has-header">
-    <h1>//TODO Pareil que imglist mais les photos de tout le monde</h1>
-    <h2>//TODO afficher comme une grille</h2>
-    <button class="button button-light" onclick="change_view(1)">
-  1/r
-</button>
-<button class="button button-light" onclick="change_view(2)">
-  2/r
-</button>
-<button class="button button-light" onclick="change_view(3)">
-  3/r
-</button>
-    <br>
-    <ion-list>
-    <li class="item col col-33" style="float:left; padding: 16px 16px 16px 16px;" ng-repeat="img in images" href="#/app/imgdetail/{{img.id}}">
-    	<img style="display:block; margin-left: auto; margin-right: auto;" ng-src="{{img.src}}"/>
-    	<hr/>
-    	<p style="text-align:center;">{{img.title}}</p>
-    </li>
-  </ion-list>
-  </ion-content>
+<ion-nav-buttons side="left">
+<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+</ion-nav-buttons>
+<ion-content padding="true" class="has-header">
+<h1>//TODO Pareil que imglist mais les photos de tout le monde</h1>
+<h2>//TODO afficher comme une grille</h2>
+
+<div class='button-bar'>
+  <button class="button button-dark" onclick="change_view(1)">
+    1/r
+  </button>
+  <button class="button button-dark" onclick="change_view(2)">
+    2/r
+  </button>
+  <button class="button button-dark" onclick="change_view(3)">
+    3/r
+  </button>
+</div>
+<br>
+<ion-list>
+<li class="item col col-33" style="float:left; padding: 16px 16px 16px 16px;" ng-repeat="img in images" href="#/app/imgdetail/{{img.id}}">
+ <img style="display:block; margin-left: auto; margin-right: auto;" ng-src="{{img.src}}"/>
+ <hr/>
+ <p style="text-align:center;">{{img.title}}</p>
+</li>
+</ion-list>
+</ion-content>
 </ion-view>

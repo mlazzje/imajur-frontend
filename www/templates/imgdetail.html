@@ -6,11 +6,11 @@
         <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
             <img ng-src="{{img.src}}"/>
         </div>
-        <a ng-click="login()" class="button button-stable button-block">Log in</a>
+        <a ng-click="login()" class="button button-positive button-block">Log in</a>
         <span style="color:green;">{{img.plus}}</span><span style="color:red; margin-left:20px;">{{img.moins}}</span>
         <div class="button-bar">
-            <button class="button button-stable button-block">+1</button>
-            <button class="button button-stable button-block">-1</button>
+            <button class="button button-balanced button-block">+1</button>
+            <button class="button button-assertive button-block">-1</button>
         </div>
         <ion-list>
             <ion-item ng-repeat="review in img.reviews">{{review.body}}</ion-item>
