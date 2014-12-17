@@ -5,5 +5,19 @@
     <ion-content padding="true" class="has-header">
     <div class="ui-grid-a"> 
      	<button onclick="take_pic();" class="button button-stable button-block">Take picture</button>
+     	<div class="button-bar">
+            <button onclick='take_pic();' class="button button-stable button-block">Take picture</button>
+            <button onclick='album_pic();' class="button button-stable button-block">Select picture</button>
+        </div>
+     	<div class="result-block"></div>			
+      	<img id="cameraImage" src="" height="50" width="50"/>
+      	<form>
+            <label class="item item-input">
+                <span class="input-label">Title</span>
+                <input type="text" placeholder="lol">
+            </label>
+        </form>
+        <button class="button button-stable button-block">Send</button>
+	</div>
     </ion-content>
 </ion-view>

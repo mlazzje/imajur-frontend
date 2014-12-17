@@ -20,7 +20,7 @@ function onPhotoURISuccess(imageURI) {
 }
 
 function take_pic() {
-    navigator.camera.getPicture(onPhotoDataSuccess, function(ex) {
+    navigator.camera.getPicture(onPhotoURISuccess, function(ex) {
         alert("Camera Error!");
     }, { quality : 30, destinationType: Camera.DestinationType.FILE_URI });
 }
@@ -32,5 +32,5 @@ function album_pic() {
         destinationType: Camera.DestinationType.FILE_URI,
         // Android Quirk: Camera.PictureSourceType.PHOTOLIBRARY and 
         // Camera.PictureSourceType.SAVEDPHOTOALBUM display the same photo album.
-        sourceType: pictureSource.SAVEDPHOTOALBUM });
+        sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM });
 }
