@@ -6,7 +6,11 @@
         <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
             <img ng-src="{{'http://twix.linuxw.info/i/'+img.id}}"/>
         </div>
-        <span style="color:green;">{{vote.upvotes.length}}</span><span style="color:red; margin-left:20px;">{{vote.downvotes.length}}</span>
+
+        <div class="row">
+          <div class="col balanced-bg balanced-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-up-icon.png"/></span>&nbsp;{{vote.upvotes.length}}</div>
+          <div class="col assertive-bg assertive-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-down-icon.png"/></span>&nbsp;{{vote.downvotes.length}}</div>
+        </div>
         <div ng-show="isLogged()" class="button-bar">
             <button class="button button-balanced button-block">
                 <img src="img/Chuck-Norris.png" style='max-width: 30px'/>
