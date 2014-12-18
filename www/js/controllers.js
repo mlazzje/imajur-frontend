@@ -3,6 +3,7 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $ionicPopup, $ionicPopover) {
   // Form data for the login modal
   $scope.loginData = {};
+  $scope.signupData = {};
   $scope.auth = {};
   //$("#menuLogout").hide();
 
@@ -126,12 +127,12 @@ angular.module('starter.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doSignup = function() {
-    console.log('Doing signup', $scope.loginData);
+    console.log('Doing signup', $scope.signupData);
     $.ajax('http://twix.linuxw.info/user/insert',
     {
       dataType: "json",
       type: "POST",
-      data: $scope.loginData,
+      data: $scope.signupData,
       success: function(data) { 
         console.log(data); 
         $scope.auth.id = data.id;
