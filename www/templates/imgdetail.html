@@ -9,8 +9,8 @@
         <div ng-controller="VoteController as voteCtrl">
             <div class="row">
                 <p>{{voteCtrl.vote}}</p>
-              <div class="col balanced-bg balanced-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-up-icon.png"/></span>&nbsp;{{vote.upvotes.length}}</div>
-              <div class="col assertive-bg assertive-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-down-icon.png"/></span>&nbsp;{{vote.downvotes.length}}</div>
+              <div class="col balanced-bg balanced-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-up-icon.png"/> {{vote.upvotes.length}}</div>
+              <div class="col assertive-bg assertive-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-down-icon.png"/> {{vote.downvotes.length}}</div>
             </div>
             <div ng-show="isLogged()" class="button-bar">
                 <button class="button button-balanced button-block" ng-click="voteCtrl.voteImg(img.id,1)">
