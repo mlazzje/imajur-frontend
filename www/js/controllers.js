@@ -195,21 +195,51 @@ angular.module('starter.controllers', [])
   });
 }])
 
+.controller('VoteController', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
+  // Perform the vote action when the user click on vote
+  this.voteImg = function(img,v) {
+    console.log('Doing vote' + img + v);
+    // vote/insert Create a vote (POST query) Requires 'point' : -1 or 1 'image' : image id to vote on
+    var vote = {};
+    vote.image = img;
+    vote.point = v;
+    $.ajax('http://twix.linuxw.info/vote/insert',
+    {
+      dataType: "json",
+      type: "POST",
+      data: vote,
+      success: function(data) { 
+        console.log(data);
+        if(v==1) {
+
+        } else {
+
+        }
+      },
+      error: function(request, textStatus, errorThrown) { 
+        console.log("error " + textStatus + ": " + errorThrown);
+        $scope.popLoginNok();
+      }
+    });
+  };
+}])
+
 .controller('ImgDetailCtrl', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
   // TODO Récupérer les élements de l'image avec son id passé en paramètres
   // template = imgdetail.html
   $scope.img = [];
-  $scope.vote = [];
   $scope.reviews = [];
+  $scope.vote = [];
   $http.get('http://twix.linuxw.info/image/get/'+$stateParams.imgId).success(function(data) {
     $scope.img = data;
-  });
-  $http.get('http://twix.linuxw.info/vote/byimage/'+$stateParams.imgId).success(function(data) {
-    $scope.vote = data;
   });
   $http.get('http://twix.linuxw.info/commentaire/byimage/'+$stateParams.imgId).success(function(data) {
     $scope.reviews = data;
   });
+  $http.get('http://twix.linuxw.info/vote/byimage/'+$stateParams.imgId).success(function(data) {
+    $scope.vote = data;
+  });
+
 } ]);
 
 
