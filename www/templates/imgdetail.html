@@ -26,13 +26,13 @@
         <div>
             <ion-list>
                 <ion-item ng-repeat="review in reviews">{{review.content}}
-                <p>- {{review.user}}</p></ion-item>
+                <p>- {{review.user.pseudo}} @ {{review.createdAt | date:'dd MMM yyyy, HH:mm:ss'}}</p></ion-item>
             </ion-list>
             <form ng-show="isLogged()" name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(img, reviews)">
                 <!--  Live Preview -->
                 <ion-list>
                     <ion-item>{{reviewCtrl.review.content}}
-                    <p>- {{reviewCtrl.review.user}}</p></ion-item>
+                    <p>- {{reviewCtrl.review.user.pseudo}}</p></ion-item>
                 </ion-list>
                 <label class="item item-input">
                     <span class="input-label">Comment</span><textarea ng-model="reviewCtrl.review.content" placeholder="Nice joke :D"> </textarea>

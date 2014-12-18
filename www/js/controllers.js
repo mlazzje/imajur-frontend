@@ -174,10 +174,11 @@ angular.module('starter.controllers', [])
 
 .controller('ReviewController', function($scope) {
   this.review = {};
-  this.review.user = $scope.auth.pseudo;
+  this.review.content = "";
+  this.review.user = {};
+  this.review.user.pseudo = $scope.auth.pseudo;
   this.addReview = function(img,reviews) {
     this.review.image = img.id;
-    console.log("content"+this.review.content);
     $.ajax($scope.apiUrl+'/commentaire/insert',
     {
       dataType: "json",
@@ -185,9 +186,14 @@ angular.module('starter.controllers', [])
       data: this.review,
       xhrFields: { withCredentials: true},
       success: function(data) { 
+        this.review = data;
+        this.review.user = {};
+        this.review.user.pseudo = $scope.auth.pseudo;
         reviews.push(this.review);
-        this.review = []; 
-        this.review.user = $scope.auth.pseudo;
+        this.review = {};
+        this.review.content = "";
+        this.review.user = {};
+        this.review.user.pseudo = $scope.auth.pseudo;
         $scope.$apply();
       },
       error: function(request, textStatus, errorThrown) { 
