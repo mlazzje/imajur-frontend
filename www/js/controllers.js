@@ -231,6 +231,22 @@ angular.module('starter.controllers', [])
   };
 }])
 
+.controller('UploadCtrl', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
+  $scope.doUpload = function(){
+    var options = new FileUploadOptions();
+
+    var params = {};
+    params.title = "title";
+
+    options.params = params;
+
+    var ft = new FileTransfer();
+    ft.upload(imgURI, 'http://twix.linuxw.info/image/insert', function(){}, function(){
+
+    }, options);
+  };
+} ])
+
 .controller('ImgDetailCtrl', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
   // TODO Récupérer les élements de l'image avec son id passé en paramètres
   // template = imgdetail.html
