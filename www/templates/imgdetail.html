@@ -23,12 +23,12 @@
                 You already voted!
             </div>
         </div>
-        <div ng-show="isLogged()">
+        <div>
             <ion-list>
                 <ion-item ng-repeat="review in reviews">{{review.content}}
                 <p>- {{review.user}}</p></ion-item>
             </ion-list>
-            <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(img, reviews)">
+            <form ng-show="isLogged()" name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(img, reviews)">
                 <!--  Live Preview -->
                 <ion-list>
                     <ion-item>{{reviewCtrl.review.content}}

@@ -173,7 +173,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ReviewController', function($scope) {
-  this.review = [];
+  this.review = {};
   this.review.user = $scope.auth.pseudo;
   this.addReview = function(img,reviews) {
     this.review.image = img.id;
@@ -188,6 +188,7 @@ angular.module('starter.controllers', [])
         reviews.push(this.review);
         this.review = []; 
         this.review.user = $scope.auth.pseudo;
+        $scope.$apply();
       },
       error: function(request, textStatus, errorThrown) { 
         console.log("error insert comm " + textStatus + ": " + errorThrown);
