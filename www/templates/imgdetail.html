@@ -4,7 +4,7 @@
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
         <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
-            <img ng-src="{{'http://twix.linuxw.info/i/'+img.id'}}"/>
+            <img ng-src="{{'http://twix.linuxw.info/i/'+img.id}}"/>
         </div>
         <a ng-click="login()" class="button button-positive button-block">Log in</a>
         <span style="color:green;">{{img.plus}}</span><span style="color:red; margin-left:20px;">{{img.moins}}</span>
@@ -25,7 +25,7 @@
                 <ion-item>{{reviewCtrl.review.body}}</ion-item>
             </ion-list>
             <label class="item item-input">
-                <span class="input-label">Comment</span><textarea ng-model="reviewCtrl.review.body" placeholder=""> </textarea>
+                <span class="input-label">Comment</span><textarea ng-model="reviewCtrl.review.body" placeholder="Nice joke :D"> </textarea>
             </label>
             <label class="item">
                 <button class="button button-block button-positive" type="submit">Send comment</button>
