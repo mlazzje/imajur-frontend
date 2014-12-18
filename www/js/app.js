@@ -70,6 +70,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: "templates/upload.html",
+        controller: "UploadCtrl"
       }
     }
   });

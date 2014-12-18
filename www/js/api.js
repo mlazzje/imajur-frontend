@@ -1,5 +1,6 @@
 var pictureSource;   // picture source
 var destinationType; // sets the format of returned value 
+var imgURI;
 // See the above in device.js for their assignments
 
 // api-camera
@@ -16,6 +17,7 @@ function onPhotoURISuccess(imageURI) {
     var cameraImage = document.getElementById('cameraImage');
     cameraImage.style.visibility = 'visible';
     cameraImage.src = imageURI;
+    imgURI = imageURI;
 }
 // permet de prendre une photo
 function take_pic() {

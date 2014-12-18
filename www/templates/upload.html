@@ -11,10 +11,10 @@
   <form>
     <label class="item item-input">
       <span class="input-label">Title</span>
-      <input type="text" placeholder="lol"/>
+      <input id='title' type="text" placeholder="lol"/>
     </label>
   </form>
-  <button class="button button-positive button-block">Send</button>
+  <button ng-click='doUpload();' class="button button-positive button-block">Send</button>
   <div class="result-block" style="max-width: 300px"></div>      
   <img id="cameraImage" src="" style="max-width: 100%"/>
 </div>
