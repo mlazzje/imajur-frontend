@@ -4,29 +4,31 @@
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
         <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
-            <img ng-src="{{'http://twix.linuxw.info/i/'+img.id}}"/>
+            <img ng-src="{{apiUrl+'/i/'+img.id}}"/>
         </div>
         <div ng-controller="VoteController as voteCtrl">
             <div class="row">
-                <p>{{voteCtrl.vote}}</p>
               <div class="col balanced-bg balanced-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-up-icon.png"/> {{vote.upvotes.length}}</div>
               <div class="col assertive-bg assertive-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-down-icon.png"/> {{vote.downvotes.length}}</div>
             </div>
-            <div ng-show="isLogged()" class="button-bar">
-                <button class="button button-balanced button-block" ng-click="voteCtrl.voteImg(img.id,1)">
+            <div id="voteBar" ng-show="!voteCtrl.hasVoted(img.votes) && isLogged()" class="button-bar">
+                <button class="button button-balanced button-block" ng-click="voteCtrl.voteImg(img.id,1,vote)">
                     Vote +1
                 </button>
-                <button class="button button-assertive button-block" ng-click="voteCtrl.voteImg(img.id,-1)">
+                <button class="button button-assertive button-block" ng-click="voteCtrl.voteImg(img.id,-1,vote)">
                     Vote -1
                 </button>
             </div>
+            <div ng-show="voteCtrl.hasVoted(img.votes) && isLogged()" class="energized-bg energized-border light" style="text-align:center; font-weight:bold;">
+                You already voted!
+            </div>
         </div>
-        <div ng-show="isLogged()">
+        <div>
             <ion-list>
                 <ion-item ng-repeat="review in reviews">{{review.content}}
                 <p>- {{review.user}}</p></ion-item>
             </ion-list>
-            <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(img, reviews)">
+            <form ng-show="isLogged()" name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(img, reviews)">
                 <!--  Live Preview -->
                 <ion-list>
                     <ion-item>{{reviewCtrl.review.content}}

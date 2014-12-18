@@ -5,7 +5,7 @@
     <ion-content padding="true" class="has-header">
         <ion-list>
         		<ion-item class="item-thumbnail-left" ng-repeat="img in imglist" href="#/app/imgdetail/{{img.id}}">
-        		<img ng-src="{{'http://twix.linuxw.info/i/'+img.id}}"/>
+        		<img ng-src="{{apiUrl+'/i/'+img.id}}"/>
         		<span>{{img.titre}}</span>
         	<p>Comments: 
         		<span>{{img.commentaires.length || 0}}</span>

@@ -5,6 +5,7 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
   $scope.signupData = {};
   $scope.auth = {};
+  $scope.apiUrl = "http://twix.linuxw.info:3000";
   //$("#menuLogout").hide();
 
   // Create the login modal that we will use later
@@ -103,11 +104,12 @@ angular.module('starter.controllers', [])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    $.ajax('http://twix.linuxw.info/user/login',
+    $.ajax($scope.apiUrl+'/user/login',
     {
       dataType: "json",
       type: "POST",
       data: $scope.loginData,
+      xhrFields: { withCredentials: true},
       success: function(data) { 
         console.log(data); 
         $scope.auth.id = data.id;
@@ -128,11 +130,12 @@ angular.module('starter.controllers', [])
   // Perform the login action when the user submits the login form
   $scope.doSignup = function() {
     console.log('Doing signup', $scope.signupData);
-    $.ajax('http://twix.linuxw.info/user/insert',
+    $.ajax($scope.apiUrl+'/user/insert',
     {
       dataType: "json",
       type: "POST",
       data: $scope.signupData,
+      xhrFields: { withCredentials: true},
       success: function(data) { 
         console.log(data); 
         $scope.auth.id = data.id;
@@ -164,26 +167,28 @@ angular.module('starter.controllers', [])
   ];*/
 
   $scope.imglist = [];
-  $http.get('http://twix.linuxw.info/image/byuser/'+$scope.auth.id).success(function(data) {
+  $http.get($scope.apiUrl+'/image/byuser/'+$scope.auth.id).success(function(data) {
     $scope.imglist = data;
   });
 })
 
 .controller('ReviewController', function($scope) {
-  this.review = [];
+  this.review = {};
   this.review.user = $scope.auth.pseudo;
   this.addReview = function(img,reviews) {
     this.review.image = img.id;
-    reviews.push(this.review);
-    $.ajax('http://twix.linuxw.info/commentaire/insert',
+    console.log("content"+this.review.content);
+    $.ajax($scope.apiUrl+'/commentaire/insert',
     {
       dataType: "json",
       type: "POST",
       data: this.review,
+      xhrFields: { withCredentials: true},
       success: function(data) { 
         reviews.push(this.review);
         this.review = []; 
         this.review.user = $scope.auth.pseudo;
+        $scope.$apply();
       },
       error: function(request, textStatus, errorThrown) { 
         console.log("error insert comm " + textStatus + ": " + errorThrown);
@@ -196,20 +201,19 @@ angular.module('starter.controllers', [])
   // TODO populer imglist avec les infos de la BDD
   // template = imglist.html
   $scope.images = [];
-  $http.get('http://twix.linuxw.info/image/list').success(function(data) {
+  $http.get($scope.apiUrl+'/image/list').success(function(data) {
     $scope.images = data;
   });
 }])
 
 .controller('VoteController', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
   // Perform the vote action when the user click on vote
-  this.voteImg = function(img,v) {
-    console.log('Doing vote' + img + v);
+  this.voteImg = function(img,v,votes) {
     // vote/insert Create a vote (POST query) Requires 'point' : -1 or 1 'image' : image id to vote on
     var vote = {};
     vote.image = img;
     vote.point = v;
-    $.ajax('http://twix.linuxw.info:3000/vote/insert',
+    $.ajax($scope.apiUrl+'/vote/insert',
     {
       dataType: "json",
       type: "POST",
@@ -218,16 +222,29 @@ angular.module('starter.controllers', [])
       success: function(data) { 
         console.log(data);
         if(v==1) {
-
+          votes.upvotes.push(data);
         } else {
-
+          votes.downvotes.push(data);
         }
+        $scope.$apply();
+        $("#voteBar").hide();
       },
       error: function(request, textStatus, errorThrown) { 
         console.log("error " + textStatus + ": " + errorThrown);
         $scope.popLoginNok();
       }
     });
+  };
+
+  this.hasVoted = function(votes) {
+    var ret = false;
+    // vote/insert Create a vote (POST query) Requires 'point' : -1 or 1 'image' : image id to vote on
+    angular.forEach(votes, function(value,key){
+      if(value.userId==$scope.auth.id) {
+        ret = true;
+      }
+    });
+    return ret
   };
 }])
 
@@ -253,13 +270,13 @@ angular.module('starter.controllers', [])
   $scope.img = [];
   $scope.reviews = [];
   $scope.vote = [];
-  $http.get('http://twix.linuxw.info/image/get/'+$stateParams.imgId).success(function(data) {
+  $http.get($scope.apiUrl+'/image/get/'+$stateParams.imgId).success(function(data) {
     $scope.img = data;
   });
-  $http.get('http://twix.linuxw.info/commentaire/byimage/'+$stateParams.imgId).success(function(data) {
+  $http.get($scope.apiUrl+'/commentaire/byimage/'+$stateParams.imgId).success(function(data) {
     $scope.reviews = data;
   });
-  $http.get('http://twix.linuxw.info/vote/byimage/'+$stateParams.imgId).success(function(data) {
+  $http.get($scope.apiUrl+'/vote/byimage/'+$stateParams.imgId).success(function(data) {
     $scope.vote = data;
   });
 
