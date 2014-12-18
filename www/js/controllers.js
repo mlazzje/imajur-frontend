@@ -74,6 +74,36 @@ angular.module('starter.controllers', [])
   $http.get('http://twix.linuxw.info/image/get/1').success(function(data) {
     $scope.test = data;
   });
+
+
+
+  $scope.img =
+    { title: 'Mathieu', 
+      id: 1,
+      plus: 28,
+      moins: 12,
+      src: "http://img3.wikia.nocookie.net/__cb20061016203941/desencyclopedie/images/c/c4/Noob.jpg",
+      reviews: [{
+        stars: 5,
+        body: "I love this gem!",
+        author: "joe@example.org",
+        createdOn: 1397490980837
+      }, {
+        stars: 1,
+        body: "This gem sucks.",
+        author: "tim@example.org",
+        createdOn: 1397490980837
+      }]
+    };
+} ])
+
+.controller('ImgDetailCtrl', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
+  // TODO Récupérer les élements de l'image avec son id passé en paramètres
+  // template = imgdetail.html
+  $scope.test = [];
+  $http.get('http://twix.linuxw.info/image/get/1').success(function(data) {
+    $scope.test = data;
+  });
   $scope.img =
     { title: 'Mathieu', 
       id: 1,
@@ -93,3 +123,5 @@ angular.module('starter.controllers', [])
       }]
     };
 } ]);
+
+
