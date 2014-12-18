@@ -11,13 +11,16 @@
               <div class="col balanced-bg balanced-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-up-icon.png"/> {{vote.upvotes.length}}</div>
               <div class="col assertive-bg assertive-border light" style="text-align:center; font-weight:bold;"><img src="img/Thumb-down-icon.png"/> {{vote.downvotes.length}}</div>
             </div>
-            <div ng-show="isLogged()" class="button-bar">
+            <div id="voteBar" ng-show="!voteCtrl.hasVoted(img.votes) && isLogged()" class="button-bar">
                 <button class="button button-balanced button-block" ng-click="voteCtrl.voteImg(img.id,1,vote)">
                     Vote +1
                 </button>
                 <button class="button button-assertive button-block" ng-click="voteCtrl.voteImg(img.id,-1,vote)">
                     Vote -1
                 </button>
+            </div>
+            <div ng-show="voteCtrl.hasVoted(img.votes) && isLogged()" class="energized-bg energized-border light" style="text-align:center; font-weight:bold;">
+                You already voted!
             </div>
         </div>
         <div ng-show="isLogged()">

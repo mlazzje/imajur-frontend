@@ -109,6 +109,7 @@ angular.module('starter.controllers', [])
       dataType: "json",
       type: "POST",
       data: $scope.loginData,
+      xhrFields: { withCredentials: true},
       success: function(data) { 
         console.log(data); 
         $scope.auth.id = data.id;
@@ -134,6 +135,7 @@ angular.module('starter.controllers', [])
       dataType: "json",
       type: "POST",
       data: $scope.signupData,
+      xhrFields: { withCredentials: true},
       success: function(data) { 
         console.log(data); 
         $scope.auth.id = data.id;
@@ -175,11 +177,13 @@ angular.module('starter.controllers', [])
   this.review.user = $scope.auth.pseudo;
   this.addReview = function(img,reviews) {
     this.review.image = img.id;
+    console.log("content"+this.review.content);
     $.ajax($scope.apiUrl+'/commentaire/insert',
     {
       dataType: "json",
       type: "POST",
       data: this.review,
+      xhrFields: { withCredentials: true},
       success: function(data) { 
         reviews.push(this.review);
         this.review = []; 
@@ -204,7 +208,6 @@ angular.module('starter.controllers', [])
 .controller('VoteController', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
   // Perform the vote action when the user click on vote
   this.voteImg = function(img,v,votes) {
-    console.log('Doing vote' + img + v + votes);
     // vote/insert Create a vote (POST query) Requires 'point' : -1 or 1 'image' : image id to vote on
     var vote = {};
     vote.image = img;
@@ -222,12 +225,25 @@ angular.module('starter.controllers', [])
         } else {
           votes.downvotes.push(data);
         }
+        $scope.$apply();
+        $("#voteBar").hide();
       },
       error: function(request, textStatus, errorThrown) { 
         console.log("error " + textStatus + ": " + errorThrown);
         $scope.popLoginNok();
       }
     });
+  };
+
+  this.hasVoted = function(votes) {
+    var ret = false;
+    // vote/insert Create a vote (POST query) Requires 'point' : -1 or 1 'image' : image id to vote on
+    angular.forEach(votes, function(value,key){
+      if(value.userId==$scope.auth.id) {
+        ret = true;
+      }
+    });
+    return ret
   };
 }])
 
