@@ -15,8 +15,11 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="login()">
+        <ion-item nav-clear menu-close ng-click="login()" ng-hide="isLogged()" id="menuLogin">
           Login
+        </ion-item>
+        <ion-item nav-clear menu-close ng-click="logOut()" ng-show="isLogged()" id="menuLogout">
+          Log out
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/browse">
           Browse
@@ -24,10 +27,10 @@
         <ion-item nav-clear menu-close href="#/app/search">
           Search
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/imglist">
+        <ion-item nav-clear menu-close href="#/app/imglist" ng-show="isLogged()">
           My Images
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/upload">
+        <ion-item nav-clear menu-close href="#/app/upload" ng-show="isLogged()">
           Upload Image
         </ion-item>
       </ion-list>

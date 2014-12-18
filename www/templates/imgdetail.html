@@ -4,11 +4,13 @@
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
         <p>{{img}}</p>
+        <p>{{vote}}</p>
+        <p>{{reviews}}</p>
         <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
             <img ng-src="{{'http://twix.linuxw.info/i/'+img.id}}"/>
         </div>
         <a ng-click="login()" class="button button-positive button-block">Log in</a>
-        <span style="color:green;">{{img.plus}}</span><span style="color:red; margin-left:20px;">{{img.moins}}</span>
+        <span style="color:green;">{{vote.upvotes.length}}</span><span style="color:red; margin-left:20px;">{{vote.downvotes.length}}</span>
         <div class="button-bar">
             <button class="button button-balanced button-block">
                 <img src="img/Chuck-Norris.png" style='max-width: 30px'/>
@@ -18,15 +20,17 @@
             </button>
         </div>
         <ion-list>
-            <ion-item ng-repeat="review in img.reviews">{{review.body}}</ion-item>
+            <ion-item ng-repeat="review in reviews">{{review.content}}
+            <p>- {{review.user}}</p></ion-item>
         </ion-list>
-        <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(img)">
+        <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(img, reviews)">
             <!--  Live Preview -->
             <ion-list>
-                <ion-item>{{reviewCtrl.review.body}}</ion-item>
+                <ion-item>{{reviewCtrl.review.content}}
+                <p>- {{reviewCtrl.review.user}}</p></ion-item>
             </ion-list>
             <label class="item item-input">
-                <span class="input-label">Comment</span><textarea ng-model="reviewCtrl.review.body" placeholder="Nice joke :D"> </textarea>
+                <span class="input-label">Comment</span><textarea ng-model="reviewCtrl.review.content" placeholder="Nice joke :D"> </textarea>
             </label>
             <label class="item">
                 <button class="button button-block button-positive" type="submit">Send comment</button>

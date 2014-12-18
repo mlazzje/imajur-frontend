@@ -1,8 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $ionicPopup, $ionicPopover) {
   // Form data for the login modal
   $scope.loginData = {};
+  $scope.auth = {};
+  //$("#menuLogout").hide();
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -10,6 +12,33 @@ angular.module('starter.controllers', [])
   }).then(function(modal) {
     $scope.modal = modal;
   });
+
+  $scope.popLoginOk = function() {
+    $ionicPopup.alert({
+    title: 'Success!',
+    content: 'Hello '+$scope.auth.pseudo+'!'
+    }).then(function(res) {
+      console.log('Test Alert Box');
+    });
+  };
+
+  $scope.popLoginNok = function() {
+    $ionicPopup.alert({
+    title: 'Fail!',
+    content: 'Bad credentials...'
+    }).then(function(res) {
+      console.log('Test Alert Box');
+    });
+  };
+
+  $scope.popLogOut = function() {
+    $ionicPopup.alert({
+    title: 'Bye '+$scope.auth.pseudo+'!',
+    content: 'You logged out successfully!'
+    }).then(function(res) {
+      console.log('Test Alert Box');
+    });
+  };
 
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
@@ -21,21 +50,42 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   };
 
+  // Vérifie si l'user est authentifié
+  $scope.isLogged = function() {
+    return $scope.auth.id;
+  };
+
+  // Vérifie si l'user est authentifié
+  $scope.logOut = function() {
+    $scope.popLogOut();
+    $scope.auth = {};
+    /*$("#menuLogout").hide();
+    $("#menuLogin").show();*/
+  };
+
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    $http.post('http://twix.linuxw.info/user/login', $scope.loginData).success(function(data, status, headers, config) {
-      console.log('Response', data);
-    }).
-    error(function(data, status, headers, config) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
+    $.ajax('http://twix.linuxw.info/user/login',
+    {
+      dataType: "json",
+      type: "POST",
+      data: $scope.loginData,
+      success: function(data) { 
+        console.log(data); 
+        $scope.auth.id = data.id;
+        $scope.auth.pseudo = data.pseudo;
+        /*$("#menuLogin").hide();
+        $("#menuLogout").show();*/
+        $scope.closeLogin();
+        $scope.popLoginOk();
+        //$scope.$apply();
+      },
+      error: function(request, textStatus, errorThrown) { 
+        console.log("error " + textStatus + ": " + errorThrown);
+        $scope.popLoginNok();
+      }
     });
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
   };
 })
 
@@ -52,11 +102,26 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('ReviewController', function() {
+.controller('ReviewController', function($scope) {
   this.review = [];
-  this.addReview = function(img) {
-    img.reviews.push(this.review);
-    this.review = [];
+  this.review.user = $scope.auth.pseudo;
+  this.addReview = function(img,reviews) {
+    this.review.image = img.id;
+    reviews.push(this.review);
+    $.ajax('http://twix.linuxw.info/commentaire/insert',
+    {
+      dataType: "json",
+      type: "POST",
+      data: this.review,
+      success: function(data) { 
+        reviews.push(this.review);
+        this.review = []; 
+        this.review.user = $scope.auth.pseudo;
+      },
+      error: function(request, textStatus, errorThrown) { 
+        console.log("error insert comm " + textStatus + ": " + errorThrown);
+      }
+    });
   };
 })
 
@@ -73,8 +138,16 @@ angular.module('starter.controllers', [])
   // TODO Récupérer les élements de l'image avec son id passé en paramètres
   // template = imgdetail.html
   $scope.img = [];
+  $scope.vote = [];
+  $scope.reviews = [];
   $http.get('http://twix.linuxw.info/image/get/'+$stateParams.imgId).success(function(data) {
     $scope.img = data;
+  });
+  $http.get('http://twix.linuxw.info/vote/byimage/'+$stateParams.imgId).success(function(data) {
+    $scope.vote = data;
+  });
+  $http.get('http://twix.linuxw.info/commentaire/byimage/'+$stateParams.imgId).success(function(data) {
+    $scope.reviews = data;
   });
 } ]);
 

@@ -24,7 +24,7 @@ function take_pic() {
         alert("Camera Error!");
     }, { quality : 30, destinationType: Camera.DestinationType.FILE_URI });
 }
-// permet de recherché une photo stockée dans l'appareil
+// permet de rechercher une photo stockée dans l'appareil
 function album_pic() { 
     // en cas de photo prise la fonction onPhotoURISuccess est appelée
     navigator.camera.getPicture(onPhotoURISuccess, function(ex) {
@@ -36,7 +36,7 @@ function album_pic() {
 
 // template browse
 // permet de changer le nbre d'images par ligne
-function change_view(nb) {
+function changeView(nb) {
     $(".col").removeClass("col-33");
     $(".col").removeClass("col-50");
     switch(nb) {
