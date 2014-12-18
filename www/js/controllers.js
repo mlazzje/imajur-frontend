@@ -10,7 +10,14 @@ angular.module('starter.controllers', [])
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
   }).then(function(modal) {
-    $scope.modal = modal;
+    $scope.modallogin = modal;
+  });
+
+  // Create the signup modal
+  $ionicModal.fromTemplateUrl('templates/signup.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modalsignup = modal;
   });
 
   $scope.popLoginOk = function() {
@@ -40,14 +47,43 @@ angular.module('starter.controllers', [])
     });
   };
 
+  $scope.popSignupOk = function() {
+    $ionicPopup.alert({
+    title: 'Success!',
+    content: 'Hello '+$scope.auth.pseudo+'!'
+    }).then(function(res) {
+      console.log('Test Alert Box');
+    });
+  };
+
+  $scope.popSignupNok = function() {
+    $ionicPopup.alert({
+    title: 'Fail!',
+    content: 'Error occured...'
+    }).then(function(res) {
+      console.log('Test Alert Box');
+    });
+  };
+
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
-    $scope.modal.hide();
+    $scope.modallogin.hide();
   };
 
   // Open the login modal
   $scope.login = function() {
-    $scope.modal.show();
+    $scope.modallogin.show();
+  };
+
+  // Open the login modal
+  $scope.signup = function() {
+    $scope.closeLogin();
+    $scope.modalsignup.show();
+  };
+
+  // Triggered in the signup modal to close it
+  $scope.closeSignup = function() {
+    $scope.modalsignup.hide();
   };
 
   // Vérifie si l'user est authentifié
@@ -84,6 +120,31 @@ angular.module('starter.controllers', [])
       error: function(request, textStatus, errorThrown) { 
         console.log("error " + textStatus + ": " + errorThrown);
         $scope.popLoginNok();
+      }
+    });
+  };
+
+  // Perform the login action when the user submits the login form
+  $scope.doSignup = function() {
+    console.log('Doing signup', $scope.loginData);
+    $.ajax('http://twix.linuxw.info/user/insert',
+    {
+      dataType: "json",
+      type: "POST",
+      data: $scope.loginData,
+      success: function(data) { 
+        console.log(data); 
+        $scope.auth.id = data.id;
+        $scope.auth.pseudo = data.pseudo;
+        /*$("#menuLogin").hide();
+        $("#menuLogout").show();*/
+        $scope.closeSignup();
+        $scope.popSignupOk();
+        //$scope.$apply();
+      },
+      error: function(request, textStatus, errorThrown) { 
+        console.log("error " + textStatus + ": " + errorThrown);
+        $scope.popSignupNok();
       }
     });
   };

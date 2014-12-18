@@ -6,15 +6,6 @@
     </div>
   </ion-header-bar>
   <ion-content>
-  <ion-popover-view>
-    <ion-header-bar>
-      <h1 class="title">Logged in</h1>
-    </ion-header-bar>
-    <ion-content>
-      You logged in successfully!
-    </ion-content>
-  </ion-popover-view>
-
     <form ng-submit="doLogin()">
       <div class="list">
         <label class="item item-input">
@@ -30,5 +21,6 @@
         </label>
       </div>
     </form>
+    <a style="" class="button button-positive button-clear button-block" ng-click="signup()">Or create an account</a>
   </ion-content>
 </ion-modal-view>
