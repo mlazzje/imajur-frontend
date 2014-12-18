@@ -48,8 +48,3 @@ function change_view(nb) {
             break;
     }
 }
-
-function upload() {
-    var img = '{ "image" : [' +
-    '{}]}';
-}
