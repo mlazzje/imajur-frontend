@@ -6,7 +6,6 @@
         <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
             <img ng-src="{{'http://twix.linuxw.info/i/'+img.id}}"/>
         </div>
-        <a ng-click="login()" class="button button-positive button-block">Log in</a>
         <span style="color:green;">{{vote.upvotes.length}}</span><span style="color:red; margin-left:20px;">{{vote.downvotes.length}}</span>
         <div ng-show="isLogged()" class="button-bar">
             <button class="button button-balanced button-block">
@@ -35,5 +34,6 @@
                 </label>
             </form>
         </div>
+        <a ng-hide="isLogged()" ng-click="login()" class="button button-positive button-block">Log in to comment and vote</a>
     </ion-content>
 </ion-view>
