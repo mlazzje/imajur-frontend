@@ -54,42 +54,20 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('BrowseCtrl', function($scope) {
+.controller('BrowseCtrl', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
   // TODO populer imglist avec les infos de la BDD
   // template = imglist.html
-  $scope.images = [
-    { id: 1, title: 'Mathieu', src:"http://fc07.deviantart.net/fs71/f/2011/054/3/c/3c512cf3b2dc387a34835c12ad9b4780-d3a8phz.gif" },
-    { id: 2,title: 'Degaine', src: "http://www.jeu-poker-coach.com/images/profils-joueurs/pokerdonk-prof.jpg" },
-    { id: 3,title: 'est un', src: "http://i218.photobucket.com/albums/cc241/sasuke123409501/Noob.gif" },
-    { id: 4,title: 'putain', src: "http://fantasy-media.s3.amazonaws.com/players/955d8c3b7c14d982bfbf5f2f4a45b734.png" },
-    { id: 5,title: 'de', src: "http://img4.wikia.nocookie.net/__cb20140627170803/plantsvszombies/images/9/98/A-noob-is_new.png" },
-    { id: 6,title: 'noob !', src: "http://mmcdn4.hosting-media.net/jpg128/u3610151766693.jpg" }
-  ];
-})
+  $scope.images = [];
+  $http.get('http://twix.linuxw.info/image/list').success(function(data) {
+    $scope.images = data;
+  });
+}])
 
 .controller('ImgDetailCtrl', ['$scope','$stateParams','$http', function($scope, $stateParams, $http) {
   // TODO Récupérer les élements de l'image avec son id passé en paramètres
   // template = imgdetail.html
-  $scope.test = [];
-  $http.get('http://twix.linuxw.info/image/get/1').success(function(data) {
-    $scope.test = data;
+  $scope.img = [];
+  $http.get('http://twix.linuxw.info/image/get/'+$stateParams.imgId).success(function(data) {
+    $scope.img = data;
   });
-  $scope.img =
-    { title: 'Mathieu', 
-      id: 1,
-      plus: 28,
-      moins: 12,
-      src: "http://img3.wikia.nocookie.net/__cb20061016203941/desencyclopedie/images/c/c4/Noob.jpg",
-      reviews: [{
-        stars: 5,
-        body: "I love this gem!",
-        author: "joe@example.org",
-        createdOn: 1397490980837
-      }, {
-        stars: 1,
-        body: "This gem sucks.",
-        author: "tim@example.org",
-        createdOn: 1397490980837
-      }]
-    };
 } ]);
