@@ -5,14 +5,13 @@
     <ion-content padding="true" class="has-header">
         <ion-list>
         		<ion-item class="item-thumbnail-left" ng-repeat="img in imglist" href="#/app/imgdetail/{{img.id}}">
-        		<img ng-src="{{img.src}}"/>
-        		<span>{{img.title}}</span>
+        		<img ng-src="{{'http://twix.linuxw.info/i/'+img.id}}"/>
+        		<span>{{img.titre}}</span>
         	<p>Comments: 
-        		<span>{{img.nb_comments}}</span>
+        		<span>{{img.commentaires.length || 0}}</span>
         	</p>
         	<p>
-        		<span style="color:green;"><img src="img/Thumb-up-icon.png"/> {{img.plus}}</span>
-        		<span style="color:red; margin-left:10px;">{{img.moins}} <img src="img/Thumb-down-icon.png"/></span>
+        		Votes: {{img.votes.length || 0}}
         	</p>
       			</ion-item>
         </ion-list>
