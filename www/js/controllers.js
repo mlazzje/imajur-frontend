@@ -263,13 +263,15 @@ angular.module('starter.controllers', [])
 
     options.params = params;
     options.fileKey="image";
-    var absURI = imgURI.slice(7)
+    var absURI = imgURI.slice(7);
+    alert(imgURI);
 
     var ft = new FileTransfer();
     ft.upload(absURI, 'http://twix.linuxw.info/image/insert', function(r){
+        alert("Image uploaded");
         console.log(r.responseCode);
     }, function(err){
-        console.log(err.code)
+        console.log(err.code);
     }, options);
   };
 } ])
